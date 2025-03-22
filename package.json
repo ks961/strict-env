@@ -1,0 +1,24 @@
+{
+  "name": "@d3vtool/strict-env",
+  "version": "1.0.0",
+  "description": "A utility to automatically load and validate environment variables from `.env` files, ensuring they're properly configured before your system starts.",
+  "main": "lib/cjs/index.js",
+  "module": "lib/esm/index.js",
+"keywords": [
+    "env",
+    "environment-variables",
+    "strict-env",
+    "dotenv",
+    "configuration",
+    "env-validation",
+    "environment-setup",
+    "configuration-management",
+    "env-loader",
+    "environment-file",
+    "nodejs",
+    "devops",
+    "secure-env"
+  ],
+  "author": "Sudhanshu Kumar",
+  "license": "MIT"
+}

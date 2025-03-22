@@ -1,0 +1,32 @@
+# .npmignore
+
+# Ignore development tools and config files
+.gitignore
+.npmignore
+.parcelrc
+.parcel-cache
+eslint.config.js
+tsconfig.app.json
+tsconfig.node.json
+tsconfig.esm.json
+tsconfig.cjs.json
+index.js
+index.ts
+index.html
+package-lock.json
+node_modules
+minify.js
+.env
+
+# Ignore source code (optional, depending on your decision to publish source code)
+src/
+coverage/
+
+# Optionally exclude tests if any
+tests/
+__tests__/
+
+# Keep dist/ folder and other important files
+!lib/
+!README.md
+!LICENSE
