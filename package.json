@@ -20,5 +20,6 @@
     "secure-env"
   ],
   "author": "Sudhanshu Kumar",
-  "license": "MIT"
+  "license": "MIT",
+  "type": "commonjs"
 }
