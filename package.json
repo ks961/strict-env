@@ -20,5 +20,9 @@
     "secure-env"
   ],
   "author": "Sudhanshu Kumar",
-  "license": "MIT"
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ks961/strict-env"
+  }
 }
