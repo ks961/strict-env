@@ -123,11 +123,3 @@ const acceptedEnvFiles = [
 ```
 
 This approach allows you to extend the configuration without modifying the core package, keeping it maintainable and compatible with future updates.
-
----
-
-### Key Updates:
-- **Optional Environment Variables**: Added a section explaining how users can mark environment variables as optional by adding `# $optional` in the `.env` file. If no value is provided for such variables, they will be set to `undefined` in `process.env`.
-- **Example for Optional Variables**: Included a detailed example showing how optional variables behave.
-
-This should help users understand how to handle both required and optional environment variables effectively!
