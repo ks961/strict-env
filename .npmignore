@@ -10,7 +10,6 @@ tsconfig.app.json
 tsconfig.node.json
 tsconfig.esm.json
 tsconfig.cjs.json
-index.js
 index.ts
 index.html
 package-lock.json
