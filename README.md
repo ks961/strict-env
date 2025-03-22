@@ -16,6 +16,7 @@ You can install `strict-env` via npm or yarn:
 npm install @d3vtool/strict-env
 ```
 ### or
+
 ```bash
 yarn add @d3vtool/strict-env
 ```
