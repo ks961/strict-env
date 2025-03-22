@@ -70,16 +70,19 @@ Example `.env` file:
 ```env
 MY_REQUIRED_VAR=some_value  # Required variable, must be set
 MY_OPTIONAL_VAR=  # $optional
+MY_OPTIONAL_VAR_WITH_VALUE=some_value2  # $optional
 ```
 
 In this case:
 - `MY_REQUIRED_VAR` will throw an error if not provided or misconfigured.
 - `MY_OPTIONAL_VAR` will be `undefined` if no value is set.
+- `MY_OPTIONAL_VAR_WITH_VALUE` will be `some_value2`, even if its set to 'optional' [ optional field can have a value ].
 
 ```javascript
 // Example Usage in Code:
 console.log(process.env.MY_REQUIRED_VAR);  // Logs 'some_value'
 console.log(process.env.MY_OPTIONAL_VAR);  // Logs 'undefined' if no value is provided
+console.log(process.env.MY_OPTIONAL_VAR_WITH_VALUE);  // Logs 'some_value2' even if its set to 'optional'
 ```
 
 ## How It Works
