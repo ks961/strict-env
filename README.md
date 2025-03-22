@@ -56,7 +56,7 @@ Here’s how you can set environment variables:
 import '@d3vtool/strict-env';
 
 // or for CommonJS projects
-// require('strict-env');
+// require('@d3vtool/strict-env');
 
 console.log(process.env.MY_ENV_VAR);  // Logs the value of the environment variable
 ```
