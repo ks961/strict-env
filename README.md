@@ -1,10 +1,10 @@
 # strict-env
 
-`strict-env` is a simple utility that automatically loads environment variables from pre-defined `.env` files when imported or required in your project. It ensures strict validation of your environment variables before your system starts, preventing potential issues from missing or misconfigured variables.
+`strict-env` is a simple utility that automatically loads environment variables from pre-defined `.env` files when imported or required in your project. It ensures strict syntax checks of your environment variables before your system starts, preventing potential issues from missing or misconfigured variables.
 
 ## Why Choose `strict-env`?
 
-Unlike other solutions, `strict-env` provides **strict validation** of your `.env` files, ensuring that your environment variables are correctly set up. If any environment variables are missing or have invalid values, `strict-env` throws **clear, explicit errors**. This helps you catch potential misconfigurations before your application runs, avoiding runtime issues.
+Unlike other solutions, `strict-env` provides **strict syntax checks** of your `.env` files, ensuring that your environment variables are correctly set up. If any environment variables are missing or have invalid values, `strict-env` throws **clear, explicit errors**. This helps you catch potential misconfigurations before your application runs, avoiding runtime issues.
 
 With `strict-env`, you can be confident that your environment variables are loaded correctly, and your application is running with the proper configuration from the start.
 
