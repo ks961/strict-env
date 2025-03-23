@@ -5,8 +5,14 @@
   "main": "lib/cjs/index.js",
   "module": "lib/esm/index.js",
   "exports": {
-    "require": "./cjs/setup.js",
-    "import": "./esm/setup.js"
+    ".": {
+      "require": "./lib/cjs/index.js",
+      "import": "./lib/esm/index.js"
+    },
+    "./setup": {
+      "require": "./lib/cjs/setup.js",
+      "import": "./lib/esm/setup.js"
+    }
   },
   "keywords": [
     "env",
