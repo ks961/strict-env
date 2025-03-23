@@ -1,10 +1,10 @@
 # strict-env
 
-`strict-env` is a simple utility that automatically loads environment variables from pre-defined `.env` files when imported or required in your project. It ensures strict syntax checks of your environment variables before your system starts, preventing potential issues from missing or misconfigured variables.
+`strict-env` is a simple utility that automatically loads environment variables from pre-defined `.env` files when imported or required in your project. It ensures strict syntax checks and validation of your environment variables before your system starts, preventing potential issues from missing or misconfigured variables.
 
 ## Why Choose `strict-env`?
 
-Unlike other solutions, `strict-env` provides **strict syntax checks** of your `.env` files, ensuring that your environment variables are correctly set up. If any environment variables are missing or have invalid values, `strict-env` throws **clear, explicit errors**. This helps you catch potential misconfigurations before your application runs, avoiding runtime issues.
+Unlike other solutions, `strict-env` provides **strict syntax checks and validation** of your `.env` files, ensuring that your environment variables are correctly set up. If any environment variables are missing or have invalid values, `strict-env` throws **clear, explicit errors**. This helps you catch potential misconfigurations before your application runs, avoiding runtime issues.
 
 With `strict-env`, you can be confident that your environment variables are loaded correctly, and your application is running with the proper configuration from the start.
 
@@ -15,16 +15,32 @@ You can install `strict-env` via npm or yarn:
 ```bash
 npm install @d3vtool/strict-env
 ```
+
 ### or
+
 ```bash
 yarn add @d3vtool/strict-env
 ```
 
 ## Usage
 
-### Importing the Package
+### Auto Loading of Environment Variables
 
-To use `@d3vtool/strict-env`, simply import or require it in your project. It will automatically load environment variables from the following `.env` files:
+To automatically load environment variables from the predefined `.env` files, simply import the setup file like so:
+
+#### ESM (ES6 Modules)
+
+```javascript
+import "@d3vtool/strict-env/setup";
+```
+
+#### CommonJS (CJS)
+
+```javascript
+require("@d3vtool/strict-env/setup");
+```
+
+Once `@d3vtool/strict-env/setup` is imported, it will automatically load the environment variables from the following `.env` files in the order specified:
 
 - `.env.local`
 - `.env.production`
@@ -33,56 +49,108 @@ To use `@d3vtool/strict-env`, simply import or require it in your project. It wi
 - `.env.development`
 - `.env`
 
+You don’t need to do anything else to load your environment variables; it will be handled automatically.
+
+### Custom Setup (Optional)
+
+If you want more control over which `.env` file to load or other configurations, you can import and use the `setup` function directly:
+
 #### ESM (ES6 Modules)
 
 ```javascript
-import '@d3vtool/strict-env';
+import { setup } from "@d3vtool/strict-env/setup";
 ```
 
 #### CommonJS (CJS)
 
 ```javascript
-require('@d3vtool/strict-env');
+const { setup } = require("@d3vtool/strict-env/setup");
 ```
 
-Once `strict-env` is imported, it will automatically load the environment variables from the predefined `.env` files. No additional code is necessary!
+The `setup` function accepts an `options` object, which allows for customization. Here's what you can specify:
 
-### Example
+- **`file`**: The specific `.env` file to load. If not provided, `strict-env` will try the default list of `.env` files.
+- **`encoding`**: The encoding to use when reading the file (defaults to `utf8`).
+- **`validators`**: Custom validation rules for your environment variables (see the [Validator](#validators) section below).
 
-Here’s how you can set environment variables:
+Example usage:
 
 ```javascript
-// Importing for ESM projects
-import '@d3vtool/strict-env';
 
-// or for CommonJS projects
-// require('@d3vtool/strict-env');
-
-console.log(process.env.MY_ENV_VAR);  // Logs the value of the environment variable
+const setupOptions = {
+  file: ".env.custom",  // Load a custom env file [ optional ]
+  encoding: "utf8",     // Set the encoding [ optional ]
+  validators: {         // Add custom validators (see below) [ optional ]
+    MY_VAR: Validator.string().minLength(10)
+  }
+}
+setup(setupOptions); // although passing 'setupOptions' is also optional.
 ```
 
-#### Setting Optional Environment Variables
+The `setup` function will load the `.env` file(s) and validate the environment variables as defined in the `validators` option.
 
-You can also set environment variables as **optional**. To do this, simply add `# $optional` as a comment after the variable name in your `.env` file. If no value is provided for an optional variable, it will be set to `undefined`.
+### Custom Validators
 
-Example `.env` file:
+The `validators` object allows you to specify rules for environment variables. You can define rules for various data types such as string, number, boolean, and object. You can also create custom validation logic or use regular expressions.
 
-```env
-MY_REQUIRED_VAR=some_value  # Required variable, must be set
-MY_OPTIONAL_VAR=  # $optional
-MY_OPTIONAL_VAR_WITH_VALUE=some_value2  # $optional
-```
-
-In this case:
-- `MY_REQUIRED_VAR` will throw an error if not provided or misconfigured.
-- `MY_OPTIONAL_VAR` will be `undefined` if no value is set.
-- `MY_OPTIONAL_VAR_WITH_VALUE` will be `some_value2`, even if its set to 'optional' [ optional field can have a value ].
+#### Example Usage:
 
 ```javascript
-// Example Usage in Code:
-console.log(process.env.MY_REQUIRED_VAR);  // Logs 'some_value'
-console.log(process.env.MY_OPTIONAL_VAR);  // Logs 'undefined' if no value is provided
-console.log(process.env.MY_OPTIONAL_VAR_WITH_VALUE);  // Logs 'some_value2' even if its set to 'optional'
+const { setup, Validator } = require("@d3vtool/strict-env");
+
+// Define validators
+const validators = Validator.object({
+  MY_ENV_VAR: Validator.string().minLength(10),  // A string with a minimum length of 10
+  API_KEY: Validator.string().regex(/^[A-Za-z0-9]{32}$/),  // Regex for a 32-character API key
+  IS_PROD: Validator.boolean()  // A boolean value (true/false)
+});
+
+setup({
+  validators
+});
+```
+
+You can also use custom validation functions:
+
+```javascript
+const validators = {
+  MY_ENV_VAR: Validator.string().custom(value => {
+    return (value !== "expected_value");
+  })
+};
+
+setup({
+  validators
+});
+```
+
+### How Validation Works
+
+Each validator type supports a variety of methods, such as `minLength()`, `maxLength()`, `regex()`, `custom()`, and others for different data types:
+
+- **`Validator.string()`**: Use for strings, can chain methods like `.minLength()` and `.regex()`.
+- **`Validator.number()`**: Use for numbers, can chain methods like `.minLength()`, `.maxLength()`, and `.integer()`.
+- **`Validator.boolean()`**: Use for boolean values (`true` or `false`).
+- **`Validator.object()`**: Use for nested objects.
+
+### Example: Defining Multiple Validators
+
+```javascript
+const { setup, Validator } = require("@d3vtool/strict-env");
+
+const validators = Validator.object({
+  USERNAME: Validator.string().minLength(5),  // Username must be at least 5 characters long
+  API_KEY: Validator.string().regex(/^[A-Za-z0-9]{32}$/),  // A 32-character API key
+  PORT: Validator.number().minLength(1024).maxLength(65535),  // Port must be between 1024 and 65535
+  ENABLE_FEATURE: Validator.boolean().strict(),  // Must be a boolean value (true or false)
+  EMAIL: Validator.string().custom(value => {
+    return (!/^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/.test(value));
+  })  // Custom email validation
+});
+
+setup({
+  validators // optional to pass.
+});
 ```
 
 ## How It Works
@@ -98,7 +166,7 @@ The `strict-env` package loads environment variables from the following `.env` f
 
 It loads the first `.env` file found in this list and ensures that all environment variables are correctly set before your application starts. If a variable is marked as optional (using `# $optional`), it will be set to `undefined` if no value is provided.
 
-## Customizing Environment File Names
+### Customizing Environment File Names
 
 If you want to use custom environment file names, you can easily modify the configuration. Instead of editing the core package directly, you can override the default configuration in your project.
 
@@ -121,5 +189,3 @@ const acceptedEnvFiles = [
     ".env.custom"  // Example: Add a custom file
 ];
 ```
-
-This approach allows you to extend the configuration without modifying the core package, keeping it maintainable and compatible with future updates.

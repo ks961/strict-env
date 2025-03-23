@@ -16,6 +16,7 @@ package-lock.json
 node_modules
 minify.js
 .env
+node_modules/
 
 # Ignore source code (optional, depending on your decision to publish source code)
 src/

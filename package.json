@@ -4,6 +4,10 @@
   "description": "A utility to automatically load and validate environment variables from `.env` files, ensuring they're properly configured before your system starts.",
   "main": "lib/cjs/index.js",
   "module": "lib/esm/index.js",
+  "exports": {
+    "require": "./lib/cjs/setup.js",
+    "import": "./lib/esm/setup.js"
+  },
   "keywords": [
     "env",
     "environment-variables",
@@ -24,5 +28,9 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/ks961/strict-env"
+  },
+  "type": "commonjs",
+  "dependencies": {
+    "@d3vtool/validator": "^1.1.0"
   }
 }
