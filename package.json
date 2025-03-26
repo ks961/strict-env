@@ -2,16 +2,16 @@
   "name": "@d3vtool/strict-env",
   "version": "2.0.8",
   "description": "A utility to automatically load and validate environment variables from `.env` files, ensuring they're properly configured before your system starts.",
-  "main": "lib/cjs/index.js",
-  "module": "lib/esm/index.js",
+  "main": "lib/index.cjs",
+  "module": "lib/index.cjs",
   "exports": {
     ".": {
-      "require": "./lib/cjs/index.js",
-      "import": "./lib/esm/index.js"
+      "require": "./lib/index.cjs",
+      "import": "./lib/index.cjs"
     },
     "./setup": {
-      "require": "./lib/cjs/setup.js",
-      "import": "./lib/esm/setup.js"
+      "require": "./lib/setup.cjs",
+      "import": "./lib/setup.cjs"
     }
   },
   "keywords": [
