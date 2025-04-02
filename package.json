@@ -36,6 +36,6 @@
     "url": "https://github.com/ks961/strict-env"
   },
   "dependencies": {
-    "@d3vtool/validator": "^1.1.0"
+    "@d3vtool/validator": "^1.1.2"
   }
 }
