@@ -153,6 +153,47 @@ setup({
 });
 ```
 
+### Example: Referencing Environment Variables
+
+```.env
+# 1. Standard Variable Reference
+POSTGRES_USER=user
+POSTGRES_PASS=pass
+DATABASE_URL=postgres://${POSTGRES_USER}:${POSTGRES_PASS}@localhost/db_your_db
+
+# 2. Circular References (This will result in an error)
+A=${B}
+B=${A}
+
+# 3. Multiple References within a Single Variable
+PREFIX=pre_
+SUFFIX=_post
+COMBO=${PREFIX}middle${SUFFIX}
+
+# 4. Single Variable Reference
+FOO=bar
+VAR_WITH_FOO=prefix_${FOO}_suffix
+
+# 5. Nested / Late References
+OUTER_VAR=outer_${INNER_VAR}
+INNER_VAR=inner
+
+# 6. Variables without References
+SIMPLE_VAR=value
+
+# 7. Empty Variables (This will result in an error)
+EMPTY_VAR=
+
+# 8. Empty Variables ( But This can be set to optional for later use, using '# $optional ' )
+EMPTY_VAR= # $optional [ using comment '#' followed by keyword '$optional' ]
+
+# 9. Handling Leading and Trailing Whitespace in Variables (Whitespace will be trimmed from both ends)
+WITH_WHITESPACE =   value   with spaces  _
+
+# 10. Special Characters in Variables (Note: The '#' character is reserved for comments)
+SPECIAL_VAR=!@$%^&*()
+```
+
 ## How It Works
 
 The `strict-env` package loads environment variables from the following `.env` files (in this order):
