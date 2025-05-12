@@ -256,7 +256,7 @@ const acceptedEnvFiles = [
 Enable auto-completion for environment variables in your TypeScript projects.
 
 Note:
->> **Please remember to include the 'strict-env.d.ts' file name in your '.ignore' files, such as '.gitignore'.**
+> **Please remember to include the 'strict-env.d.ts' file name in your '.ignore' files, such as '.gitignore'.**
 
 **Automatic Environment Variable Loading:**
 
