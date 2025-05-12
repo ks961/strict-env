@@ -277,3 +277,6 @@ Note: If the file 'strict-env.d.ts' already exists, the process will exit early 
 
 Therefore, if you have made changes to your .env file, you need to manually delete 
 'strict-env.d.ts' to force a re-parse of the environment variables.
+
+Also, Please remember to include the 'strict-env.d.ts' file name in 
+your '.ignore' files, such as '.gitignore'.
