@@ -275,4 +275,5 @@ tsetup("src"); // Indicates that 'tsconfig.json' is located in the 'src' directo
 
 Note: If the file 'strict-env.d.ts' already exists, the process will exit early and skip parsing your environment variables.
 
-Therefore, if you have made changes to your .env file, you need to manually delete 'strict-env.d.ts' to force a re-parse of the environment variables.
+Therefore, if you have made changes to your .env file, you need to manually delete 
+'strict-env.d.ts' to force a re-parse of the environment variables.
