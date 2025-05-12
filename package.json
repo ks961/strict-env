@@ -12,6 +12,14 @@
     "./setup": {
       "require": "./lib/setup.cjs",
       "import": "./lib/setup.cjs"
+    },
+    "./tsetup": {
+      "require": "./lib/tsetup.cjs",
+      "import": "./lib/tsetup.cjs"
+    },
+    "./tindex": {
+      "require": "./lib/t-index.cjs",
+      "import": "./lib/t-index.cjs"
     }
   },
   "keywords": [

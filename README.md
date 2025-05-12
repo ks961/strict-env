@@ -1,25 +1,45 @@
-# strict-env
+# env-env-d
 
-`strict-env` is a simple utility that automatically loads environment variables from pre-defined `.env` files when imported or required in your project. It ensures strict syntax checks and validation of your environment variables before your system starts, preventing potential issues from missing or misconfigured variables.
+`env-env-d` is a simple utility that automatically loads environment variables from pre-defined `.env` files when imported or required in your project. It ensures strict syntax checks and validation of your environment variables before your system starts, preventing potential issues from missing or misconfigured variables.
 
-## Why Choose `strict-env`?
+## Why Choose `env-env-d`?
 
-Unlike other solutions, `strict-env` provides **strict syntax checks and validation** of your `.env` files, ensuring that your environment variables are correctly set up. If any environment variables are missing or have invalid values, `strict-env` throws **clear, explicit errors**. This helps you catch potential misconfigurations before your application runs, avoiding runtime issues.
+Unlike other solutions, `env-env-d` provides **strict syntax checks and validation** of your `.env` files, ensuring that your environment variables are correctly set up. If any environment variables are missing or have invalid values, `env-env-d` throws **clear, explicit errors**. This helps you catch potential misconfigurations before your application runs, avoiding runtime issues.
 
-With `strict-env`, you can be confident that your environment variables are loaded correctly, and your application is running with the proper configuration from the start.
+With `env-env-d`, you can be confident that your environment variables are loaded correctly, and your application is running with the proper configuration from the start.
+
+---
+
+## Table of Contents
+
+* [Installation](#installation)
+* [Usage](#usage)
+
+  * [Auto Loading of Environment Variables](#auto-loading-of-environment-variables)
+  * [Custom Setup (Optional)](#custom-setup-optional)
+  * [Custom Validators](#custom-validators)
+  * [How Validation Works](#how-validation-works)
+  * [Example: Defining Multiple Validators](#example-defining-multiple-validators)
+  * [Example: Referencing Environment Variables](#example-referencing-environment-variables)
+* [How It Works](#how-it-works)
+
+  * [Customizing Environment File Names](#customizing-environment-file-names)
+  * [TypeScript Environment Variable Auto-Completion](#typescript-environment-variable-auto-completion)
+
+---
 
 ## Installation
 
-You can install `strict-env` via npm or yarn:
+You can install `env-env-d` via npm or yarn:
 
 ```bash
-npm install @d3vtool/strict-env
+npm install @d3vtool/env-env-d
 ```
 
 ### or
 
 ```bash
-yarn add @d3vtool/strict-env
+yarn add @d3vtool/env-env-d
 ```
 
 ## Usage
@@ -31,16 +51,16 @@ To automatically load environment variables from the predefined `.env` files, si
 #### ESM (ES6 Modules)
 
 ```javascript
-import "@d3vtool/strict-env/setup";
+import "@d3vtool/env-env-d/setup";
 ```
 
 #### CommonJS (CJS)
 
 ```javascript
-require("@d3vtool/strict-env/setup");
+require("@d3vtool/env-env-d/setup");
 ```
 
-Once `@d3vtool/strict-env/setup` is imported, it will automatically load the environment variables from the following `.env` files in the order specified:
+Once `@d3vtool/env-env-d/setup` is imported, it will automatically load the environment variables from the following `.env` files in the order specified:
 
 - `.env.local`
 - `.env.production`
@@ -58,18 +78,18 @@ If you want more control over which `.env` file to load or other configurations,
 #### ESM (ES6 Modules)
 
 ```javascript
-import { setup } from "@d3vtool/strict-env/setup";
+import { setup } from "@d3vtool/env-env-d/setup";
 ```
 
 #### CommonJS (CJS)
 
 ```javascript
-const { setup } = require("@d3vtool/strict-env/setup");
+const { setup } = require("@d3vtool/env-env-d/setup");
 ```
 
 The `setup` function accepts an `options` object, which allows for customization. Here's what you can specify:
 
-- **`file`**: The specific `.env` file to load. If not provided, `strict-env` will try the default list of `.env` files.
+- **`file`**: The specific `.env` file to load. If not provided, `env-env-d` will try the default list of `.env` files.
 - **`encoding`**: The encoding to use when reading the file (defaults to `utf8`).
 - **`validators`**: Custom validation rules for your environment variables (see the [Validator](#validators) section below).
 
@@ -96,7 +116,7 @@ The `validators` object allows you to specify rules for environment variables. Y
 #### Example Usage:
 
 ```javascript
-const { setup, Validator } = require("@d3vtool/strict-env");
+const { setup, Validator } = require("@d3vtool/env-env-d");
 
 // Define validators
 const validators = Validator.object({
@@ -136,7 +156,7 @@ Each validator type supports a variety of methods, such as `minLength()`, `maxLe
 ### Example: Defining Multiple Validators
 
 ```javascript
-const { setup, Validator } = require("@d3vtool/strict-env");
+const { setup, Validator } = require("@d3vtool/env-env-d");
 
 const validators = Validator.object({
   USERNAME: Validator.string().minLength(5),  // Username must be at least 5 characters long
@@ -196,7 +216,7 @@ SPECIAL_VAR=!@$%^&*()
 
 ## How It Works
 
-The `strict-env` package loads environment variables from the following `.env` files (in this order):
+The `env-env-d` package loads environment variables from the following `.env` files (in this order):
 
 1. `.env.local`
 2. `.env.production`
@@ -213,7 +233,7 @@ If you want to use custom environment file names, you can easily modify the conf
 
 ### Steps to Customize:
 
-1. Copy the `acceptedEnvFiles.cjs` file from the `strict-env` package into your project's directory.
+1. Copy the `acceptedEnvFiles.cjs` file from the `env-env-d` package into your project's directory.
 2. Modify the `acceptedEnvFiles` array to include your custom environment files.
 
 Example:
@@ -229,4 +249,26 @@ const acceptedEnvFiles = [
     // Add your custom env file here
     ".env.custom"  // Example: Add a custom file
 ];
+```
+
+### TypeScript Environment Variable Auto-Completion
+
+Enable auto-completion for environment variables in your TypeScript projects.
+
+**Automatic Environment Variable Loading:**
+
+```typescript
+import "@d3vtool/env-env-d/tsetup";
+```
+
+**Custom `tsconfig.json` Path Configuration:**
+
+```typescript
+import { tsetup } from "@d3vtool/env-env-d/tindex";
+
+// Uses the current working directory by default for 'tsconfig.json'
+tsetup();
+
+// Or specify a custom path to your 'tsconfig.json' file
+tsetup("src"); // Indicates that 'tsconfig.json' is located in the 'src' directory.
 ```
