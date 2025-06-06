@@ -21,9 +21,7 @@ With `strict-env`, you can be confident that your environment variables are load
   * [How Validation Works](#how-validation-works)
   * [Example: Defining Multiple Validators](#example-defining-multiple-validators)
   * [Example: Referencing Environment Variables](#example-referencing-environment-variables)
-* [How It Works](#how-it-works)
-
-  * [Customizing Environment File Names](#customizing-environment-file-names)
+  
   * [TypeScript Environment Variable Auto-Completion](#typescript-environment-variable-auto-completion)
 
 ---
