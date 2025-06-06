@@ -214,43 +214,6 @@ WITH_WHITESPACE =   value   with spaces  _
 SPECIAL_VAR=!@$%^&*()
 ```
 
-## How It Works
-
-The `strict-env` package loads environment variables from the following `.env` files (in this order):
-
-1. `.env.local`
-2. `.env.production`
-3. `.env.staging`
-4. `.env.test`
-5. `.env.development`
-6. `.env`
-
-It loads the first `.env` file found in this list and ensures that all environment variables are correctly set before your application starts. If a variable is marked as optional (using `# $optional`), it will be set to `undefined` if no value is provided.
-
-### Customizing Environment File Names
-
-If you want to use custom environment file names, you can easily modify the configuration. Instead of editing the core package directly, you can override the default configuration in your project.
-
-### Steps to Customize:
-
-1. Copy the `acceptedEnvFiles.cjs` file from the `strict-env` package into your project's directory.
-2. Modify the `acceptedEnvFiles` array to include your custom environment files.
-
-Example:
-
-```javascript
-const acceptedEnvFiles = [
-    ".env.local",
-    ".env.production",
-    ".env.staging",
-    ".env.test",
-    ".env.development",
-    ".env", 
-    // Add your custom env file here
-    ".env.custom"  // Example: Add a custom file
-];
-```
-
 ### TypeScript Environment Variable Auto-Completion
 
 Enable auto-completion for environment variables in your TypeScript projects.
