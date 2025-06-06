@@ -21,7 +21,7 @@ With `strict-env`, you can be confident that your environment variables are load
   * [How Validation Works](#how-validation-works)
   * [Example: Defining Multiple Validators](#example-defining-multiple-validators)
   * [Example: Referencing Environment Variables](#example-referencing-environment-variables)
-  
+
   * [TypeScript Environment Variable Auto-Completion](#typescript-environment-variable-auto-completion)
 
 ---
@@ -218,6 +218,8 @@ Enable auto-completion for environment variables in your TypeScript projects.
 
 Note:
 > **Please remember to include the 'strict-env.d.ts' file name in your '.ignore' files, such as '.gitignore'.**
+
+> **When using the TypeScript environment version, it will update your package.json by adding a "strict-env" key to monitor modifications to your 'env' file, and it will automatically update the key-value pairs to support auto-completion.**
 
 **Automatic Environment Variable Loading:**
 
