@@ -58,16 +58,7 @@ import "@d3vtool/strict-env/setup";
 require("@d3vtool/strict-env/setup");
 ```
 
-Once `@d3vtool/strict-env/setup` is imported, it will automatically load the environment variables from the following `.env` files in the order specified:
-
-- `.env.local`
-- `.env.production`
-- `.env.staging`
-- `.env.test`
-- `.env.development`
-- `.env`
-
-You don’t need to do anything else to load your environment variables; it will be handled automatically.
+Once `@d3vtool/strict-env/setup` is imported, it will automatically load the environment variables from the following `.env`.
 
 ### Custom Setup (Optional)
 
